@@ -71,6 +71,21 @@
             font-weight: bold;
             color: #555;
         }
+        .loader:after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 4px solid rgba(0, 0, 0, 0.2);
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         #preview {
             max-width: 100%;
             margin: 20px 0;
@@ -84,8 +99,8 @@
     <h1>זיהוי צבעי תמונה</h1>
     <input type="file" id="imageUploader" accept="image/*" />
     <button class="button" id="showColorsButton" disabled>זיהוי צבעים</button>
-    <div class="loader" id="loader">מנתח תמונה...</div>
-    <img id="preview" alt="Image Preview" />
+    <div class="loader" id="loader"></div>
+    <img id="preview" alt="תצוגה מקדימה" />
     <canvas id="canvas"></canvas>
     <div class="colors" id="colorDisplay"></div>
 
@@ -131,7 +146,7 @@
                     loader.style.display = 'none';
                     const colors = extractColors(imageData);
                     displayColors(colors);
-                    document.getElementById('colorDisplay').scrollIntoView({ behavior: 'smooth' }); // קפיצה לשורת הצבעים
+                    document.getElementById('colorDisplay').scrollIntoView({ behavior: 'smooth' });
                 }, 1000);
             }
         });
